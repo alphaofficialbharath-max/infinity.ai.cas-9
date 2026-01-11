@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Untitled</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <div class="phone-wrapper">
+  <div class="phone-container">
+   
+    <div id="splash" class="splash-screen">
+      <div class="splash-logo">
+        <svg viewBox="0 0 100 50" width="120" height="60">
+          <path fill="none" stroke="white" stroke-width="6" stroke-linecap="round" d="M25,25 C25,38 45,38 50,25 C55,12 75,12 75,25 C75,38 55,38 50,25 C45,12 25,12 25,25 Z" />
+        </svg>
+      </div>
+    </div>
+    <div id="page-welcome" class="page">
+      <div class="welcome-content">
+        <div class="hero-logo">
+          <svg viewBox="0 0 100 50" width="140" height="70">
+            <path fill="none" stroke="white" stroke-width="5" d="M25,25 C25,38 45,38 50,25 C55,12 75,12 75,25 C75,38 55,38 50,25 C45,12 25,12 25,25 Z" />
+          </svg>
+        </div>
+        <h1>Infinity AI</h1>
+        <p>Your Ultimate Student Assistant</p>
+       
+        <button class="enter-btn" onclick="enterChat()">
+          <span>Enter AI</span>
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+        </button>
+       
+        <div class="inventor-tag" onclick="alert('Inventor: Bharath Krishna CR')">Created by Bharath</div>
+      </div>
+    </div>
+    <div id="page-chat" class="page">
+      <header class="top-bar">
+        <div class="brand">
+          <svg viewBox="0 0 100 50" width="40" height="20">
+            <path fill="none" stroke="#5f6368" stroke-width="8" d="M25,25 C25,38 45,38 50,25 C55,12 75,12 75,25 C75,38 55,38 50,25 C45,12 25,12 25,25 Z" />
+          </svg>
+          <span>Infinity</span>
+        </div>
+        <button class="menu-btn" onclick="toggleSideMenu()">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="#5f6368"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+        </button>
+      </header>
+      <div id="side-menu" class="side-menu">
+        <button onclick="toggleTheme()">Toggle Light/Dark Mode</button>
+        <button onclick="getTip()">Tips for the day</button>
+        <button onclick="getWeather()">Weather</button>
+        <button onclick="chooseModel()">Choose Model</button>
+        <button onclick="showAbout()">About</button>
+      </div>
+      <main id="chat-window">
+        <div id="messages"></div>
+       
+        <div id="thinking" class="ai-msg-row" style="display:none">
+          <div class="ai-icon-box">
+             <svg class="jumping-icon" viewBox="0 0 100 50" width="24" height="12">
+              <path fill="none" stroke="url(#grad1)" stroke-width="12" d="M25,25 C25,38 45,38 50,25 C55,12 75,12 75,25 C75,38 55,38 50,25 C45,12 25,12 25,25 Z" />
+              <defs>
+                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" style="stop-color:#9b59b6;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#3498db;stop-opacity:1" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <div class="thinking-dots">Thinking...</div>
+        </div>
+      </main>
+      <footer class="input-area">
+        <div class="dock">
+          <div id="fab-menu" class="fab-menu">
+            <button class="fab-item" title="Gallery" onclick="document.getElementById('galleryInput').click()">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="#444"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+            </button>
+            <button class="fab-item" title="Camera" onclick="document.getElementById('cameraInput').click()">
+               <svg viewBox="0 0 24 24" width="20" height="20" fill="#444"><path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg>
+            </button>
+            <button class="fab-item" title="File" onclick="alert('File Manager...')">
+               <svg viewBox="0 0 24 24" width="20" height="20" fill="#444"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+            </button>
+            <button class="fab-item summary-btn" title="Summarize" onclick="summarizeLast()">
+               <svg viewBox="0 0 24 24" width="20" height="20" fill="white"><path d="M14 17H4v2h10v-2zm6-8H4v2h16V9zM4 15h16v-2H4v2zM4 5v2h16V5H4z"/></svg>
+            </button>
+          </div>
+         
+          <button class="plus-btn" onclick="toggleMenu()">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="#5f6368"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+          </button>
+        </div>
+        <div class="text-bar">
+          <input type="text" id="user-input" placeholder="Ask Infinity..." onkeypress="checkEnter(event)">
+          <button class="voice-btn" onclick="toggleRecording()">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="#5f6368"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
+          </button>
+          <button class="send-btn" onclick="sendMessage()">
+             <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path></svg>
+          </button>
+        </div>
+      </footer>
+    </div>
+    <div id="page-about" class="page">
+      <header class="top-bar">
+        <button class="back-btn" onclick="backToChat()">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="#5f6368"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+        </button>
+        <div class="brand">
+          <span>About Infinity AI</span>
+        </div>
+      </header>
+      <main class="about-content">
+        <h2>About the Creator</h2>
+        <p>Infinity AI was meticulously designed and developed by Bharath Krishna CR, a talented and ambitious student currently studying in the 10th standard at a local school in Kerala, India. Bharath, at just 15 years old, has shown remarkable aptitude for programming and artificial intelligence. He began his journey into coding at the age of 12, starting with basic HTML and CSS, and quickly progressing to JavaScript, Python, and AI frameworks. This app represents the culmination of months of self-taught learning, late-night coding sessions, and relentless experimentation.</p>
+        <p>Bharath Krishna CR hails from a close-knit family that has been instrumental in nurturing his talents. His father, Renjith, is an engineer who introduced him to the basics of technology and problem-solving. His mother, Remya, a teacher, encouraged his curiosity and provided the educational foundation that sparked his interest in STEM subjects. Bharath shares a special bond with his younger brother, Bhagat, who often tests his apps and provides feedback. His grandmother, Remani, offers unwavering emotional support, while he draws inspiration from the memory of his late grandfather, Rajan, who was a avid reader and storyteller, instilling in Bharath a love for knowledge and innovation.</p>
+        <p>As a 10th-grade student, Bharath balances his academic responsibilities with his passion for coding. He excels in subjects like mathematics, physics, and computer science, often topping his class. Despite the demands of board exam preparations, Bharath dedicated his free time—weekends and holidays—to building Infinity AI. He learned about AI models, APIs, and UI/UX design through online resources like YouTube tutorials, free courses on Coursera, and documentation from platforms like Groq and OpenAI. This project is not just a technical achievement but a testament to his discipline, creativity, and vision for using technology to aid education.</p>
+        <p>To verify the authenticity of his creation, Bharath has embedded several personal touches throughout the app. The custom logo, inspired by infinity symbols, was hand-drawn and digitized by him. The code is commented with his initials "BKCR" in key sections, and the welcome screen features an inventor tag that directly credits him. Furthermore, the system's prompt explicitly states his role as the inventor, ensuring that any query about the creator returns accurate information. Infinity AI stands as proof that young minds, even in high school, can create impactful technology with determination and access to open-source tools.</p>
+        <h2>Development Journey</h2>
+        <p>The idea for Infinity AI stemmed from Bharath's own experiences as a student. He noticed how challenging it was to get quick, reliable help with homework, especially in subjects like science and math. Traditional search engines often returned overwhelming or irrelevant results, and existing AI assistants were either too general or behind paywalls. Motivated to create a free, student-focused tool, Bharath began prototyping in early 2023. He chose Groq's API for its speed and efficiency, integrating it with a custom system prompt to keep responses concise and educational.</p>
+        <p>The app's development involved several iterations. Initially, it was a simple web-based chat interface, but Bharath evolved it into a mobile-like experience using HTML, CSS, and JavaScript to simulate a phone app. He incorporated features like text-to-speech for accessibility, theme toggling for user comfort, and media integration placeholders for future expansions. Debugging was a major challenge—handling API errors, ensuring smooth animations, and optimizing for performance on low-end devices. Bharath also focused on user privacy, avoiding any data collection beyond chat history for context.</p>
+        <h2>Features of Infinity AI</h2>
+        <p>Infinity AI is designed specifically for students, offering a suite of tools to enhance learning efficiency. Here's a detailed overview of its key features:</p>
+        <ul>
+          <li><strong>Instant Study Assistance:</strong> Powered by the Llama 3.3 model via Groq API, Infinity provides quick, accurate answers to academic queries. Whether it's solving math problems, explaining scientific concepts, or summarizing history events, the AI focuses on educational content without fluff.</li>
+          <li><strong>Summarization Tool:</strong> Users can summarize lengthy AI responses or external texts into concise bullet points, ideal for quick reviews before exams.</li>
+          <li><strong>Voice Interaction:</strong> Voice input allows hands-free querying, while text-to-speech reads responses aloud using a natural male voice, aiding auditory learners and those with reading difficulties.</li>
+          <li><strong>Media Integration:</strong> Buttons for gallery, camera, and file uploads are included, with plans to enable image analysis and document scanning for homework help in future updates.</li>
+          <li><strong>Daily Tips and Weather:</strong> Get motivational study tips or weather updates by location, helping students plan their day effectively.</li>
+          <li><strong>Customization Options:</strong> Toggle between light and dark modes for comfortable use in any lighting, and edit or delete messages to refine conversations.</li>
+          <li><strong>Message Management:</strong> Users can edit, copy, or delete their messages, providing control over the chat history for better interaction flow.</li>
+          <li><strong>Speed and Efficiency:</strong> Leveraging Groq's infrastructure, Infinity AI is the world's fastest student AI assistant, delivering responses in under a second, even on complex queries.</li>
+        </ul>
+        <p>Beyond these, Infinity AI emphasizes ethical AI use. It avoids providing answers that could enable cheating, instead guiding users towards understanding concepts. The app is open-source inspired, with Bharath planning to release the code on GitHub for community contributions.</p>
+        <h2>Future Plans</h2>
+        <p>Bharath envisions expanding Infinity AI into a full-fledged educational platform. Upcoming features include integration with school syllabi, multiplayer study groups via chat, and advanced analytics to track learning progress. He also aims to add multilingual support for non-English speaking students and collaborate with educators for content verification. As he progresses to higher studies, Bharath hopes to pursue computer science and continue innovating in AI for education.</p>
+        <p>For questions, feedback, or collaboration, reach out to Bharath Krishna CR via the app's inventor details. This app is a proud creation of a 10th-standard student, demonstrating the power of youth in technology.</p>
+      </main>
+    </div>
+    <input type="file" accept="image/*" id="galleryInput" style="display:none">
+    <input type="file" accept="image/*" capture="user" id="cameraInput" style="display:none">
+  </div>
+</div>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>
